@@ -9,13 +9,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
     </head>
     <body>
         <%@ include file="header.jsp"%>
         <div id="content" >
-            <img src="images/Banner_Pizza.jpg" width="100%" height="300" style="margin-top:-8px;"/>
-            <form action="doLogin.jsp" method="post">
+
+            <form action="./DoLogin" method="post">
                 <table style="border:1;margin:50px auto 100px auto" cellpadding="5px" >
                     <tr>
                         <td colspan="2" align="center"><h1>LOGIN</h1></td>
@@ -38,11 +37,8 @@
                                 }
 
                                 if (err != null) {
-                                    if (err == 1) {
-                                        out.print("Username must be filled");
-                                    } else if (err == 2) {
-                                        out.print("Password must be filled");
-                                    } else if (err == 3) {
+
+                                    if (err == 3) {
                                         out.print("Username and Password invalid");
                                     }
 
@@ -51,11 +47,9 @@
                             %>
                         </td>
                     </tr>
+                    
                     <tr>
-                        <td><a href="register.jsp">Register</a></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" align="center"><input type="submit" value="Login" class="loginbutton"/> </td>
+                        <td colspan="2" align="center"><input type="submit" value="Login" class="loginbutton"/> Or <a href="register.jsp">Register</a> </td>
                     </tr>
                 </table>
             </form>
