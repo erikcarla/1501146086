@@ -59,7 +59,7 @@ public class DoLogin extends HttpServlet {
 
                 response.sendRedirect("home.jsp");
             } else {
-                response.sendRedirect("index.jsp?err=Username & Password Salah");
+                response.sendRedirect("index.jsp?err=3");
             }
         } catch (SQLException ex) {
             Logger.getLogger(DoLogin.class.getName()).log(Level.SEVERE, null, ex);

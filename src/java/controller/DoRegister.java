@@ -4,6 +4,7 @@
  */
 package controller;
 
+import bean.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -47,7 +48,7 @@ public class DoRegister extends HttpServlet {
         int tot = 0;
 
         if (user == "") {
-            response.sendRedirect("registrasi.jsp?err=1");
+            response.sendRedirect("register.jsp?err=1");
         } else {
             query = "select count(*) from MsUser where Username='" + user + "'";
             ResultSet rs = con.execute(query);
@@ -106,40 +107,47 @@ public class DoRegister extends HttpServlet {
             }
 
             if (tot > 0) {
-                response.sendRedirect("registrasi.jsp?err=8");
+                response.sendRedirect("register.jsp?err=8");
             } else if (pass == "") {
-                response.sendRedirect("registrasi.jsp?err=2");
+                response.sendRedirect("register.jsp?err=2");
             } else if (pass.length() < 6) {
-                response.sendRedirect("registrasi.jsp?err=15");
+                response.sendRedirect("register.jsp?err=15");
             } else if (cpass == "") {
-                response.sendRedirect("registrasi.jsp?err=3");
+                response.sendRedirect("register.jsp?err=3");
             } else if (!cpass.equals(pass)) {
-                response.sendRedirect("registrasi.jsp?err=14");
+                response.sendRedirect("register.jsp?err=14");
             } else if (name == "") {
-                response.sendRedirect("registrasi.jsp?err=16");
+                response.sendRedirect("register.jsp?err=16");
             } else if (!cekname) {
-                response.sendRedirect("registrasi.jsp?err=17");
+                response.sendRedirect("register.jsp?err=17");
             } else if (address == "") {
-                response.sendRedirect("registrasi.jsp?err=6");
+                response.sendRedirect("register.jsp?err=6");
             } else if (address.length() < 8) {
-                response.sendRedirect("registrasi.jsp?err=9");
+                response.sendRedirect("register.jsp?err=9");
             } else if (telephone == "") {
-                response.sendRedirect("registrasi.jsp?err=4");
+                response.sendRedirect("register.jsp?err=4");
             } else if (!cektelp) {
-                response.sendRedirect("registrasi.jsp?err=11");
+                response.sendRedirect("register.jsp?err=11");
             } else if (email == "") {
-                response.sendRedirect("registrasi.jsp?err=5");
+                response.sendRedirect("register.jsp?err=5");
             } else if (!cekemail) {
-                response.sendRedirect("registrasi.jsp?err=13");
+                response.sendRedirect("register.jsp?err=13");
             } else {
-                query = "insert into MsUser(Username,Password,Name,Email,Address,Telephone,RoleID) values('" + user + "','" + pass + "','" + name + "','" + email + "','" + address + "','" + telephone + "',2)";
+                User u = new User();
+                u.setUsername(user);
+                u.setPassword(pass);
+                u.setAddress(address);
+                u.setEmail(email);
+                u.setName(name);
+                u.setTelephone(telephone);
+                u.insert(getServletContext());
 
                 //out.print(query);
                 try {
                     con.Query(query);
                 } catch (Exception e) {
                 }
-                response.sendRedirect("registrasi.jsp?err=7");
+                response.sendRedirect("register.jsp?err=7");
 
 
 
